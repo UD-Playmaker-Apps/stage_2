@@ -1,26 +1,25 @@
 package ulpgc.bigd.control_module;
 
-import io.javalin.Javalin;
-import com.google.gson.Gson;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import java.io.IOException;
 
 public class App {
+    public static void main(String[] args) throws IOException {
+        OkHttpClient client = new OkHttpClient();
 
-    private static final Gson gson = new Gson();
+        // Llamada a ingestion-service
+        Request request = new Request.Builder()
+                .url("http://localhost:7001/ingest/1342")
+                .post(okhttp3.RequestBody.create(new byte[0]))
+                .build();
 
-    public static void main(String[] args) {
-        Javalin app = Javalin.create(config -> {
-            config.http.defaultContentType = "application/json";
-        }).start(7003); // Puerto del control module
+        try (Response response = client.newCall(request).execute()) {
+            System.out.println(response.body().string());
+        }
 
-        ControlController controller = new ControlController();
-
-        app.get("/control/status", ctx -> ctx.result(gson.toJson(controller.getSystemStatus())));
-        app.post("/control/process/{book_id}", ctx -> {
-            int bookId = Integer.parseInt(ctx.pathParam("book_id"));
-            ctx.result(gson.toJson(controller.processBook(bookId)));
-        });
-
-        System.out.println("✅ Control Module running on http://localhost:7003");
+        // Aquí seguirías con indexing-service y search-service
     }
 }
-

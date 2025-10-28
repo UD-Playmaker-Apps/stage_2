@@ -13,16 +13,15 @@ public class App {
 
         Javalin app = Javalin.create(config -> {
             config.http.defaultContentType = "application/json";
-            config.plugins.enableCors(cors -> cors.add(it -> it.anyHost())); // útil para pruebas desde navegador
         }).start(port);
 
         System.out.println("✅ Search Service running on port " + port);
 
         app.get("/status", ctx -> {
             Map<String, Object> status = Map.of(
-                "service", "search-service",
-                "status", "running",
-                "port", port
+                    "service", "search-service",
+                    "status", "running",
+                    "port", port
             );
             ctx.result(gson.toJson(status));
         });
