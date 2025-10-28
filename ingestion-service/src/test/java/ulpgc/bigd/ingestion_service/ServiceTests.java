@@ -1,4 +1,4 @@
-package ulpgc.dacd.ingestion_service;
+package ulpgc.bigd.ingestion_service;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class ServiceTests {

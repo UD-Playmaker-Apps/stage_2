@@ -29,12 +29,19 @@ final class IndexRepository {
     private Map<Integer, Map<String, Object>> metadata;
 
     IndexRepository() {
-        this.datalake = Paths.get(System.getenv().getOrDefault("DATALAKE_DIR", "../ingestion-service/datalake")).toAbsolutePath();
-        this.datamart = Paths.get(System.getenv().getOrDefault("DATAMART_DIR", "./datamart")).toAbsolutePath();
+        // Ruta consistente con IngestionRepository
+        String dl = System.getenv().getOrDefault("DATALAKE_DIR", "./ingestion-service/datalake");
+        this.datalake = Paths.get(dl).toAbsolutePath().normalize();
+
+        String dm = System.getenv().getOrDefault("DATAMART_DIR", "./indexing-service/datamart");
+        this.datamart = Paths.get(dm).toAbsolutePath().normalize();
+
         this.indexFile = datamart.resolve("inverted-index.json");
         this.metadataFile = datamart.resolve("metadata.json");
+
         load();
     }
+
 
     private void load() {
         try {
