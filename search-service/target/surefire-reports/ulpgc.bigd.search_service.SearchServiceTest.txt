@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ulpgc.bigd.search_service.SearchServiceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 s -- in ulpgc.bigd.search_service.SearchServiceTest
