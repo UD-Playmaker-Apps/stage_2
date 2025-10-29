@@ -3,6 +3,7 @@ package ulpgc.bigd.control_module;
 import java.util.*;
 import java.io.*;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class StateManager {
 
@@ -28,8 +29,10 @@ public class StateManager {
             File file = new File(FILE_PATH);
             if (file.exists()) {
                 String json = new String(java.nio.file.Files.readAllBytes(file.toPath()));
-                Map<Integer, String> loaded = gson.fromJson(json, Map.class);
-                if (loaded != null) stateMap.putAll(loaded);
+                Map<String, String> loaded = gson.fromJson(json, new TypeToken<Map<String,String>>(){}.getType());
+                if (loaded != null) {
+                    loaded.forEach((k, v) -> stateMap.put(Integer.parseInt(k), v));
+                }
             }
         } catch (Exception e) {
             System.err.println("⚠️ Error loading state: " + e.getMessage());
@@ -44,4 +47,3 @@ public class StateManager {
         }
     }
 }
-

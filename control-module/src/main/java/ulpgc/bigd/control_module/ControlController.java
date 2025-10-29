@@ -21,7 +21,11 @@ public class ControlController {
             return Map.of("book_id", bookId, "status", "completed");
         } catch (Exception e) {
             e.printStackTrace();
-            return Map.of("book_id", bookId, "status", "error", "message", e.getMessage());
+            return Map.of(
+                    "book_id", bookId,
+                    "status", "error",
+                    "message", e.getMessage()
+            );
         }
     }
 
@@ -29,4 +33,3 @@ public class ControlController {
         return state.getAllStates();
     }
 }
-

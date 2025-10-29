@@ -26,7 +26,7 @@ public class App {
             ctx.result(gson.toJson(status));
         });
 
-        // Endpoints de búsqueda
+        // Endpoint principal
         app.get("/search", SearchController::search);
     }
 }

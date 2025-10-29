@@ -1,25 +1,40 @@
 package ulpgc.bigd.control_module;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-import java.io.IOException;
+import io.javalin.Javalin;
+import com.google.gson.Gson;
+import java.util.Map;
 
 public class App {
-    public static void main(String[] args) throws IOException {
-        OkHttpClient client = new OkHttpClient();
 
-        // Llamada a ingestion-service
-        Request request = new Request.Builder()
-                .url("http://localhost:7001/ingest/1342")
-                .post(okhttp3.RequestBody.create(new byte[0]))
-                .build();
+    private static final Gson gson = new Gson();
 
-        try (Response response = client.newCall(request).execute()) {
-            System.out.println(response.body().string());
-        }
+    public static void main(String[] args) {
+        int port = 7004; // puerto del control-module
+        ControlController controller = new ControlController();
 
-        // Aquí seguirías con indexing-service y search-service
+        Javalin app = Javalin.create(config -> {
+            config.http.defaultContentType = "application/json";
+        }).start(port);
+
+        System.out.println("✅ Control Module running on port " + port);
+
+        // Endpoints
+        app.get("/status", ctx -> {
+            Map<String, Object> status = controller.getSystemStatus();
+            ctx.result(gson.toJson(status));
+        });
+
+        app.post("/process/{bookId}", ctx -> {
+            int bookId;
+            try {
+                bookId = Integer.parseInt(ctx.pathParam("bookId"));
+            } catch (NumberFormatException e) {
+                ctx.status(400).result(gson.toJson(Map.of("error", "Invalid bookId")));
+                return;
+            }
+
+            Map<String, Object> result = controller.processBook(bookId);
+            ctx.result(gson.toJson(result));
+        });
     }
 }
