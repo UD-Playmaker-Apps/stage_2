@@ -35,7 +35,7 @@ public class StateManager {
                 }
             }
         } catch (Exception e) {
-            System.err.println("⚠️ Error loading state: " + e.getMessage());
+            System.err.println("Error loading state: " + e.getMessage());
         }
     }
 
@@ -43,7 +43,7 @@ public class StateManager {
         try (FileWriter fw = new FileWriter(FILE_PATH)) {
             fw.write(gson.toJson(stateMap));
         } catch (IOException e) {
-            System.err.println("⚠️ Error saving state: " + e.getMessage());
+            System.err.println("Error saving state: " + e.getMessage());
         }
     }
 }

@@ -18,7 +18,6 @@ public class Orchestrator {
     private final String INDEXING_URL;
 
     public Orchestrator() {
-        // URLs parametrizables con variables de entorno
         this.INGESTION_URL = System.getenv().getOrDefault("INGESTION_URL", "http://localhost:7001");
         this.INDEXING_URL = System.getenv().getOrDefault("INDEXING_URL", "http://localhost:7002");
     }

@@ -16,7 +16,7 @@ public class App {
             config.http.defaultContentType = "application/json";
         }).start(port);
 
-        System.out.println("✅ Control Module running on port " + port);
+        System.out.println("Control Module running on port " + port);
 
         // Endpoints
         app.get("/status", ctx -> {

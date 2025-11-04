@@ -50,13 +50,12 @@ final class IngestionRepository {
     }
 
     IngestionRepository() {
-        // Cambiado el directorio por defecto
         String dl = System.getenv().getOrDefault("DATALAKE_DIR", "../ingestion-service/datalake");
         this.datalakeRoot = Paths.get(dl).toAbsolutePath().normalize();
         this.logFile = datalakeRoot.resolve("ingestion-log.json");
 
-        ensureDir(datalakeRoot);  // crea el directorio si no existe
-        ensureFile(logFile);       // crea el archivo de log si no existe
+        ensureDir(datalakeRoot);
+        ensureFile(logFile);
     }
 
 

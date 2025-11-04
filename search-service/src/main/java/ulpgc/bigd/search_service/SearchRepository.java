@@ -34,7 +34,7 @@ public class SearchRepository {
                 invertedIndex = gson.fromJson(Files.newBufferedReader(INDEX_FILE), idxType);
                 if (invertedIndex == null) invertedIndex = new HashMap<>();
             }
-            System.out.printf("📚 Loaded %d metadata entries, %d index terms%n", metadata.size(), invertedIndex.size());
+            System.out.printf("Loaded %d metadata entries, %d index terms%n", metadata.size(), invertedIndex.size());
         } catch (IOException e) {
             System.err.println("[ERROR] Failed to load datamart files: " + e.getMessage());
         }

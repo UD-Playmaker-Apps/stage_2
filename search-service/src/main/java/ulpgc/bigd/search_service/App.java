@@ -15,7 +15,7 @@ public class App {
             config.http.defaultContentType = "application/json";
         }).start(port);
 
-        System.out.println("✅ Search Service running on port " + port);
+        System.out.println("Search Service running on port " + port);
 
         app.get("/status", ctx -> {
             Map<String, Object> status = Map.of(

@@ -29,7 +29,6 @@ final class IndexRepository {
     private Map<Integer, Map<String, Object>> metadata;
 
     IndexRepository() {
-        // Ruta consistente con IngestionRepository
         String dl = System.getenv().getOrDefault("DATALAKE_DIR", "../ingestion-service/datalake");
         this.datalake = Paths.get(dl).toAbsolutePath().normalize();
 
