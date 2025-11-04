@@ -1,15 +1,5 @@
 # Stage 2 Microservices Scaffold
 
-Este repositorio esqueleto separa el proyecto monolítico en **4** proyectos Maven independientes:
-- `ingestion-service` (puerto 7001)
-- `indexing-service`  (puerto 7002)
-- `search-service`    (puerto 7003)
-- `control-module`    (puerto 7004)
-
-Cada servicio usa **Java 17 + Javalin + Gson** y expone APIs REST en JSON tal como se especifica en el enunciado.
-
-# Stage 2 Microservices Scaffold
-
 This skeleton repository breaks the monolithic project into **4** independent Maven projects:
 - `ingestion-service` (port 7001)
 - `indexing-service`  (port 7002)
